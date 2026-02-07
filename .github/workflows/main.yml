@@ -1,16 +1,10 @@
 name: Build and Release
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "main", 'dev' ]
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Environment to deploy to'
-        required: true
-        default: 'dev'
     
-
 env:
   NAME: reboottouefi
   DOMAIN: ubaygd.com
@@ -33,7 +27,7 @@ jobs:
               run: make pack
 
             - name: Upload Release Asset
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v6
               with:
                 name: release-asset
                 path: $(NAME)@$(DOMAIN)-*.${FILE_EXT}
