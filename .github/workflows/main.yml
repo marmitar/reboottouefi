@@ -4,6 +4,12 @@ on:
   push:
     branches: [ "main", 'dev' ]
 
+env:
+  NAME: reboottouefi
+  DOMAIN: ubaygd.com
+  FILE_EXT: zip 
+
+
 jobs:
     release:
         runs-on: ubuntu-latest
@@ -19,9 +25,18 @@ jobs:
             - name: Build package
               run: make pack
 
-            - name: Create Release
-              uses: softprops/action-gh-release@v2
+            - name: Upload Release Asset
+              uses: actions/upload-artifact@v3
               with:
-                files: "*.zip"
+                name: release-asset
+                path: $(NAME)@$(DOMAIN)-*.${FILE_EXT}
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+            # - name: Create Release
+            #   uses: softprops/action-gh-release@v2
+            #   with:
+            #     files: "*.zip"
+            #   env:
+            #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
