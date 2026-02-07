@@ -3,6 +3,13 @@ name: Build and Release
 on:
   push:
     branches: [ "main", 'dev' ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'dev'
+    
 
 env:
   NAME: reboottouefi
