@@ -30,7 +30,7 @@ jobs:
               uses: actions/upload-artifact@v6
               with:
                 name: release-asset
-                path: $(NAME)@$(DOMAIN)-*.${FILE_EXT}
+                path: "$(NAME)@$(DOMAIN)-*.${FILE_EXT}"
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
